@@ -10,8 +10,11 @@ def solution(n):
     
     
 def solution(n, lost, reserve):
-    common = set(lost).intersection(reserve) 
-    for v in common: 
-        reserve.pop(reserve.index(v)) 
-        lost.pop(lost.index(v))
-    answer = n-len(lost)
+   set_reserve=set(reserve)-set(lost)
+   set_lost = set(lost)-set(reserve)
+   for i in set_reserve:
+       if i-1 in set_lost:
+          set_lost.remove(i-1)
+       elif i+1 in set_lost:
+          set_lost.remove(i+1)
+   return n-len(set_lost)
